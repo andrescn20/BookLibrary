@@ -7,15 +7,13 @@ const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
 const modal = document.getElementById("modal");
+const readStatus = document.getElementById("readStatus");
 const span = document.getElementsByClassName("close")[0];
 
 const addBtn = document.getElementById("addBtn");
 const modalBtn = document.getElementById("modalBtn");
 
 const libraryContainer = document.getElementById("library");
-
-let bookContainer = document.createElement("div");
-bookContainer.setAttribute("class", "bookContainer");
 
 // Add Event Listener to New Book Button --> Opens Modal
 modalBtn.onclick = function () {
@@ -37,9 +35,13 @@ window.onclick = function (event) {
 // Initialice the Library Array
 let library = [];
 
-//Event Listener for button to Rock N Roll
+//Event Listener to Add Book Button within Modal
 addBtn.addEventListener("click", (event) => {
   addToLibrary(generateBook());
+  // For Every Click, we create the texts for book info and the remove button
+
+  let bookContainer = document.createElement("div");
+  bookContainer.setAttribute("class", "bookContainer");
 
   let bookTitle = document.createElement("p");
 
@@ -52,16 +54,13 @@ addBtn.addEventListener("click", (event) => {
   let removeBtn = document.createElement("button");
   let btnText = document.createTextNode("Remove");
 
+  let statusBtn = document.createElement("button");
+  let statusText = document.createTextNode("Read");
+
   library.forEach((element) => {
     bookTitle.innerHTML = element.title;
     bookAuthor.innerHTML = element.author;
     bookPages.innerHTML = element.pages;
-
-    if (element.readStatus == false) {
-      readStatus.data = "Not Read";
-    } else {
-      readStatus.data = "Read";
-    }
 
     bookContainer.appendChild(bookTitle);
     bookContainer.appendChild(bookAuthor);
@@ -69,8 +68,13 @@ addBtn.addEventListener("click", (event) => {
     bookContainer.appendChild(readStatus);
     bookContainer.appendChild(removeBtn);
     removeBtn.appendChild(btnText);
+    bookContainer.appendChild(statusBtn);
+    statusBtn.appendChild(statusText);
 
-    // bookTitle.setAttribute("class", "tittle");
+    // Event Listener that removes Books from Library
+    removeBtn.onclick = function () {
+      bookContainer.remove();
+    };
 
     libraryContainer.appendChild(bookContainer);
   });
@@ -89,11 +93,11 @@ function generateBook() {
 }
 
 //Object Constructor for making new Book entries
-function Book(title, author, pages) {
+function Book(title, author, pages, readStatus) {
   (this.title = title),
     (this.author = author),
     (this.pages = pages),
-    (this.readStatus = false);
+    (this.readStatus = true);
 }
 
 //Receives the newly Generated Book and adds to Library Array.
@@ -101,8 +105,9 @@ function addToLibrary(currentBook) {
   library.push(currentBook);
 }
 
-function generateBookDisplay(item) {
-  console.log(item);
-  bookContainer.appendChild(bookTitle);
-  libraryContainer.appendChild(bookContainer);
-}
+// // Fu
+// function generateBookDisplay(item) {
+//   console.log(item);
+//   bookContainer.appendChild(bookTitle);
+//   libraryContainer.appendChild(bookContainer);
+// }
