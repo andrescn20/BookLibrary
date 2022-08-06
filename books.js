@@ -6,42 +6,56 @@
 const title = document.getElementById("title");
 const author = document.getElementById("author");
 const pages = document.getElementById("pages");
+const modal = document.getElementById("modal");
+const span = document.getElementsByClassName("close")[0];
 
 const addBtn = document.getElementById("addBtn");
+const modalBtn = document.getElementById("modalBtn");
 
 const libraryContainer = document.getElementById("library");
 
 let bookContainer = document.createElement("div");
 bookContainer.setAttribute("class", "bookContainer");
 
-let Silmarillion = {
-  title: "Silmarillion",
-  author: "Tolkien",
-  pages: "468",
-  readStatus: false,
+// Add Event Listener to New Book Button --> Opens Modal
+modalBtn.onclick = function () {
+  modal.style.display = "block";
 };
 
-let currentBook = {};
-let library = [Silmarillion];
+// Add Event Listener to closing Span of modal
+span.onclick = function () {
+  modal.style.display = "none";
+};
+
+// Close Modal when clicking outside of it
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+// Initialice the Library Array
+let library = [];
 
 //Event Listener for button to Rock N Roll
 addBtn.addEventListener("click", (event) => {
   addToLibrary(generateBook());
 
-  console.log(library);
+  let bookTitle = document.createElement("p");
 
-  let bookTitle = document.createTextNode("");
+  let bookAuthor = document.createElement("p");
 
-  let bookAuthor = document.createTextNode("");
+  let bookPages = document.createElement("p");
 
-  let bookPages = document.createTextNode("");
+  let readStatus = document.createElement("p");
 
-  let readStatus = document.createTextNode("");
+  let removeBtn = document.createElement("button");
+  let btnText = document.createTextNode("Remove");
 
   library.forEach((element) => {
-    bookTitle.data = element.title;
-    bookAuthor.data = element.author;
-    bookPages.data = element.pages;
+    bookTitle.innerHTML = element.title;
+    bookAuthor.innerHTML = element.author;
+    bookPages.innerHTML = element.pages;
 
     if (element.readStatus == false) {
       readStatus.data = "Not Read";
@@ -53,6 +67,10 @@ addBtn.addEventListener("click", (event) => {
     bookContainer.appendChild(bookAuthor);
     bookContainer.appendChild(bookPages);
     bookContainer.appendChild(readStatus);
+    bookContainer.appendChild(removeBtn);
+    removeBtn.appendChild(btnText);
+
+    // bookTitle.setAttribute("class", "tittle");
 
     libraryContainer.appendChild(bookContainer);
   });
@@ -67,7 +85,6 @@ function userData() {
 //Calls constructor with retrieved data
 function generateBook() {
   let newBook = new Book(...userData());
-  currentBook = newBook;
   return newBook;
 }
 
@@ -89,7 +106,3 @@ function generateBookDisplay(item) {
   bookContainer.appendChild(bookTitle);
   libraryContainer.appendChild(bookContainer);
 }
-
-// logFunction(){
-
-// }

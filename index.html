@@ -7,11 +7,23 @@
     <title>Book Library</title>
     <script defer src="books.js"></script>
     <link href="style.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
       <h1>Book Library</h1>
-      <div>
+    </header>
+
+    <button id="modalBtn">
+      Add new Book <br /><i class="material-icons"> library_books</i>
+    </button>
+    <!-- This section contains the Modal Box for asking data to user -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
         <label for="title"> Title</label>
         <input type="text" id="title" />
 
@@ -23,8 +35,9 @@
 
         <button type="button" id="addBtn">Add Book</button>
       </div>
+    </div>
 
-      <div id="library"></div>
-    </header>
+    <!--This container is going to be populated through JS with the corrsponding books  -->
+    <div id="library"></div>
   </body>
 </html>
