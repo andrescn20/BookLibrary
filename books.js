@@ -38,26 +38,20 @@ let library = [];
 //Event Listener to Add Book Button within Modal
 addBtn.addEventListener("click", (event) => {
   addToLibrary(generateBook());
-  // For Every Click, we create the texts for book info and the remove button
 
   let bookContainer = document.createElement("div");
   bookContainer.setAttribute("class", "bookContainer");
-
   let bookTitle = document.createElement("p");
-
   let bookAuthor = document.createElement("p");
-
   let bookPages = document.createElement("p");
-
   let readStatus = document.createElement("p");
-
   let removeBtn = document.createElement("button");
   let btnText = document.createTextNode("Remove");
-
   let statusBtn = document.createElement("button");
-  let statusText = document.createTextNode("Read");
+  let statusText = document.createTextNode("Read?");
 
   library.forEach((element) => {
+    let readValue = false;
     bookTitle.innerHTML = element.title;
     bookAuthor.innerHTML = element.author;
     bookPages.innerHTML = element.pages;
@@ -71,9 +65,21 @@ addBtn.addEventListener("click", (event) => {
     bookContainer.appendChild(statusBtn);
     statusBtn.appendChild(statusText);
 
-    // Event Listener that removes Books from Library
+    // Event Listener for btn that removes Books from Library
     removeBtn.onclick = function () {
       bookContainer.remove();
+    };
+
+    //Event Listener for Read Status Button
+    statusBtn.onclick = function () {
+      readValue = !readValue;
+      if (readValue === true) {
+        statusBtn.style.background = "green";
+        statusBtn.innerHTML = "Read";
+      } else if (readValue === false) {
+        statusBtn.style.background = "red";
+        statusBtn.innerHTML = "Not Read";
+      }
     };
 
     libraryContainer.appendChild(bookContainer);
