@@ -44,11 +44,15 @@ addBtn.addEventListener("click", (event) => {
   let bookTitle = document.createElement("p");
   let bookAuthor = document.createElement("p");
   let bookPages = document.createElement("p");
-  let readStatus = document.createElement("p");
   let removeBtn = document.createElement("button");
   let btnText = document.createTextNode("Remove");
   let statusBtn = document.createElement("button");
   let statusText = document.createTextNode("Read?");
+
+  bookTitle.setAttribute("class", "titles");
+  bookAuthor.setAttribute("class", "author");
+  bookPages.setAttribute("class", "pages");
+  statusBtn.setAttribute("class", "statusButton");
 
   library.forEach((element) => {
     let readValue = false;
@@ -59,7 +63,6 @@ addBtn.addEventListener("click", (event) => {
     bookContainer.appendChild(bookTitle);
     bookContainer.appendChild(bookAuthor);
     bookContainer.appendChild(bookPages);
-    bookContainer.appendChild(readStatus);
     bookContainer.appendChild(removeBtn);
     removeBtn.appendChild(btnText);
     bookContainer.appendChild(statusBtn);
@@ -110,10 +113,3 @@ function Book(title, author, pages, readStatus) {
 function addToLibrary(currentBook) {
   library.push(currentBook);
 }
-
-// // Fu
-// function generateBookDisplay(item) {
-//   console.log(item);
-//   bookContainer.appendChild(bookTitle);
-//   libraryContainer.appendChild(bookContainer);
-// }
