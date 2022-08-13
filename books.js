@@ -108,9 +108,4 @@ class Book {
   addToLibrary(currentBook) {
     library.push(currentBook);
   }
-
-  // generateBook() {
-  //   const newBook = new Book(...userData());
-  //   return newBook;
-  // }
 }
