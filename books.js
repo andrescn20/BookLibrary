@@ -37,7 +37,8 @@ let library = [];
 
 //Event Listener to Add Book Button within Modal
 addBtn.addEventListener("click", (event) => {
-  addToLibrary(generateBook());
+  let currentBook = new Book(...userData());
+  currentBook.addToLibrary(currentBook);
 
   let bookContainer = document.createElement("div");
   bookContainer.setAttribute("class", "bookContainer");
@@ -95,21 +96,21 @@ function userData() {
   return bookData;
 }
 
-//Calls constructor with retrieved data
-function generateBook() {
-  let newBook = new Book(...userData());
-  return newBook;
-}
+//Book Class
+class Book {
+  constructor(title, author, pages, readStatus) {
+    (this.title = title),
+      (this.author = author),
+      (this.pages = pages),
+      (this.readStatus = true);
+  }
 
-//Object Constructor for making new Book entries
-function Book(title, author, pages, readStatus) {
-  (this.title = title),
-    (this.author = author),
-    (this.pages = pages),
-    (this.readStatus = true);
-}
+  addToLibrary(currentBook) {
+    library.push(currentBook);
+  }
 
-//Receives the newly Generated Book and adds to Library Array.
-function addToLibrary(currentBook) {
-  library.push(currentBook);
+  // generateBook() {
+  //   const newBook = new Book(...userData());
+  //   return newBook;
+  // }
 }
